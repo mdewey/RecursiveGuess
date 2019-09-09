@@ -30,6 +30,7 @@ namespace RecursiveGuess
           printGuess(guess);
           Logic(Console.ReadLine(), guess, high, low);
           break;
+        case "":
         default:
           printGuess(guess);
           Logic(Console.ReadLine(), guess, high, low);
@@ -37,10 +38,8 @@ namespace RecursiveGuess
       }
     }
 
-    static void Main(string[] args)
-    {
-      Console.WriteLine("Hello World!");
+    static void Main(string[] args) =>
       Logic(String.Empty, CalculateGuess(MAX, MIN), MAX, MIN);
-    }
+
   }
 }
