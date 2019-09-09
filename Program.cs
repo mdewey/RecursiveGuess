@@ -7,35 +7,33 @@ namespace RecursiveGuess
     static int MAX = 100;
     static int MIN = 0;
     static Func<int, int, int> CalculateGuess = (high, low) => (high + low) / 2;
+    static Action<int> printGuess = g => Console.WriteLine($"Is your number {g}");
+
     static void Logic(string input, int guess, int high, int low)
     {
-      Action<int> printGuess = g => Console.WriteLine($"Is your number {g}");
-      if (input == "stop")
+      switch (input.ToLower())
       {
-        return;
-      }
-      else if (input == "yes")
-      {
-        Console.WriteLine("Awesome!");
-      }
-      else if (input == "h")
-      {
-        low = guess;
-        guess = CalculateGuess(high, low);
-        printGuess(guess);
-        Logic(Console.ReadLine(), guess, high, low);
-      }
-      else if (input == "l")
-      {
-        high = guess;
-        guess = CalculateGuess(high, low);
-        printGuess(guess);
-        Logic(Console.ReadLine(), guess, high, low);
-      }
-      else
-      {
-        printGuess(guess);
-        Logic(Console.ReadLine(), guess, high, low);
+        case var s when s.StartsWith("stop"):
+          return;
+        case var s when s.StartsWith("yes"):
+          Console.WriteLine("Awesome!");
+          return;
+        case var s when s.StartsWith("h"):
+          low = guess;
+          guess = CalculateGuess(high, low);
+          printGuess(guess);
+          Logic(Console.ReadLine(), guess, high, low);
+          break;
+        case var s when s.StartsWith("l"):
+          high = guess;
+          guess = CalculateGuess(high, low);
+          printGuess(guess);
+          Logic(Console.ReadLine(), guess, high, low);
+          break;
+        default:
+          printGuess(guess);
+          Logic(Console.ReadLine(), guess, high, low);
+          break;
       }
     }
 
