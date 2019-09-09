@@ -2,11 +2,30 @@
 
 namespace RecursiveGuess
 {
-    class Program
+  class Program
+  {
+    static void Logic(string input)
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello World!");
-        }
+      if (!String.IsNullOrWhiteSpace(input))
+      {
+        Console.WriteLine("you entered " + input);
+      }
+
+
+      if (input == "stop")
+      {
+        return;
+      }
+      else
+      {
+        Logic(Console.ReadLine());
+      }
     }
+
+    static void Main(string[] args)
+    {
+      Console.WriteLine("Hello World!");
+      Logic(String.Empty);
+    }
+  }
 }
